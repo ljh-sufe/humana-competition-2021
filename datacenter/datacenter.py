@@ -1,10 +1,8 @@
 
-import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 import numpy.linalg as li
 import logging
-import torch
 from scipy import stats
 from scipy.stats import chi2_contingency
 from dataCenter.all0var import all0var
@@ -13,7 +11,7 @@ LOG_FORMAT = "%(asctime)s - %(levelname)s - %(message)s"
 logging.basicConfig(level=logging.INFO, format=LOG_FORMAT)
 
 from sklearn.preprocessing import KBinsDiscretizer, FunctionTransformer
-
+import sklearn
 
 from pandas_profiling import ProfileReport
 
