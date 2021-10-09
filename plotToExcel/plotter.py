@@ -233,6 +233,7 @@ class excelOutput():
     def plot_categorical_distribution_(self, DF, sheetname):
 
         varDF = DF
+        varDF = varDF.dropna(axis=0)
         var = sheetname
         yname = dataSet.dependentVar
 
