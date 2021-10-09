@@ -178,7 +178,7 @@ class excelOutput():
         chart.set_plotarea({
             'layout': {
                 'x': 0.12,
-                'y': 0.12,
+                'y': 0.2,
                 'width': 0.7,
                 'height': 0.65,
             }
@@ -203,7 +203,16 @@ class excelOutput():
             'smooth': True,
         })
         chart.combine(chart1)
-
+        title = var
+        chart.set_title({
+            'name': title,
+            'overlay': True,
+            'layout': {
+                'x': 0.03,
+                'y': 0.03,
+            },
+            "name_font": {"size": 15}
+        })
         worksheet.insert_chart("F1", chart)
 
 
@@ -244,7 +253,7 @@ class excelOutput():
         chart1.set_plotarea({
             'layout': {
                 'x': 0.12,
-                'y': 0.12,
+                'y': 0.2,
                 'width': 0.7,
                 'height': 0.65,
             }
@@ -289,7 +298,7 @@ class excelOutput():
         chart.set_plotarea({
             'layout': {
                 'x': 0.12,
-                'y': 0.12,
+                'y': 0.2,
                 'width': 0.7,
                 'height': 0.65,
             }
@@ -314,7 +323,16 @@ class excelOutput():
             'smooth': True,
         })
         chart.combine(chart1)
-
+        title = var
+        chart.set_title({
+            'name': title,
+            'overlay': True,
+            'layout': {
+                'x': 0.03,
+                'y': 0.03,
+            },
+            "name_font": {"size": 15}
+        })
         worksheet.insert_chart("F1", chart)
 
         self.workbook = workbook

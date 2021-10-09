@@ -11,12 +11,14 @@ class indicatorAnalyzer():
         exceloutputer = excelOutput()
 
         vaccineData = dataSet.vaccineData
-
+        filename = ""
+        for x in varList:
+            filename = filename + "_" + x
         dataDict = {}
         for var in varList:
             dataDict[var] = vaccineData[[var, dataSet.dependentVar]]
 
-        exceloutputer.var_analyzer_workbook(filepath="Varanalyze.xlsx", dataDict=dataDict)
+        exceloutputer.var_analyzer_workbook(filepath="C:\\Users\\41409\\Desktop\\bc\\result\\anavar_"+ filename +".xlsx", dataDict=dataDict)
 
 
     def analyze_twofeatures(self, varList):
@@ -25,4 +27,4 @@ class indicatorAnalyzer():
         vaccineData = dataSet.vaccineData
         DF = vaccineData[varList + [dataSet.dependentVar]]
         filename = varList[0] + varList[1]
-        exceloutputer.twofeatureCompare_workbook(DF, filepath="C:\\Users\\41409\\Desktop\\bc\\result\\"+ filename +".xlsx")
+        exceloutputer.twofeatureCompare_workbook(DF, filepath="C:\\Users\\41409\\Desktop\\bc\\result\\twofeature_"+ filename +".xlsx")
