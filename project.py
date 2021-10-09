@@ -22,27 +22,30 @@ dataSet.filepath = r"C:\Users\41409\Desktop\bc\2021_Competition_Training.csv"
 pickleFilepath = "C:/Users/41409/Desktop/bc"
 
 dataSet.init()
-dataSet.loadHoldOut()
-dataSet.importExternalVariable()
 
-dataSet.processor()
-dataSet.varSelector()
+
+
+# dataSet.loadHoldOut()
+# dataSet.importExternalVariable()
+#
+# dataSet.processor()
+# dataSet.varSelector()
 
 # # dataSet.initPickleData(pickleFilepath)
-dataSet.initEvalData(ratio=0.2)
+# dataSet.initEvalData(ratio=0.2)
 
 
-model1 = logisticRegressionModel(lr=0.01, optimizer="ADAM", epochs=5, ifEval=True, ifQuadratic=False)
-model1.trainModel()
-model2 = lightGBMModel(ifEval=True)
-model2.trainModel()
+# model1 = logisticRegressionModel(lr=0.01, optimizer="ADAM", epochs=5, ifEval=True, ifQuadratic=False)
+# model1.trainModel()
+# model2 = lightGBMModel(ifEval=True)
+# model2.trainModel()
 
 # model1.predictProba(dataSet.holdOut)
 # model2.predictProba(dataSet.holdOut)
 
 
 ana = indicatorAnalyzer()
-# ana.analyze_twofeatures(["cms_orig_reas_entitle_cd", "est_age"])
+ana.analyze_twofeatures(["cons_chmi", "est_age"])
 
 # ana.analyze_var(["atlas_pct_free_lunch14", "est_age", "cms_orig_reas_entitle_cd", "rx_gpi2_17_pmpm_cost_t_12-9-6m_b4", "rx_overall_gpi_pmpm_ct_0to3m_b4"])
 

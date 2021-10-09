@@ -312,12 +312,14 @@ class excelOutput():
         1
         var0 = DF.columns[0]     # x
         var1 = DF.columns[1]     # y
+        DF[[var0, var1]] = DF[[var0, var1]].fillna(DF[[var0, var1]].median(), axis=0)
 
-        DF = DF.sample(10000)
+        DF = pd.concat([DF[DF[dataSet.dependentVar] == "no_vacc"].sample(6000), DF[DF[dataSet.dependentVar] == "vacc"].sample(6000)], axis=0)
+
         if var1 in dataSet.categoricalVar:
             yinterval = None
         else:
-            yinterval = round(max(max(DF[var1]), max(DF[var1])) / 5 + 0.02, 3)
+            yinterval = round(max(DF[var1].max(), DF[var1].max() / 5 + 0.02), 3)
         if var0 in dataSet.categoricalVar:
             1
             Xinterval = DF[var0].value_counts(dropna=False).index.to_list()
@@ -325,7 +327,7 @@ class excelOutput():
             Xinterval = pd.DataFrame(index=Xinterval, data=[i for i in range(0, len(Xinterval))])
             DF[var0] = DF[var0].map(lambda x: Xinterval.loc[x].values[0])
         else:
-            Xinterval = round(max(max(DF[var0]), max(DF[var0])) / 5 + 0.02, 3)
+            Xinterval = round(max(DF[var0].max(), DF[var0].max() / 5 + 0.02), 3)
 
         DFvacc = DF[DF[dataSet.dependentVar] == "vacc"]
         DFno_vacc = DF[DF[dataSet.dependentVar] == "no_vacc"]
@@ -367,9 +369,12 @@ class excelOutput():
             "values": "='" + sheetname + "'!$B$1:$B$" + str(binsx),
             "marker": {
                 'type': 'square',
+                'border': {
+                    'type': "no_line",
+                },
                 "fill": {
                     "color": "blue",
-                    "transparency": 30,
+                    "transparency": 80,
                 },
             }
         })
@@ -380,9 +385,12 @@ class excelOutput():
             "values": "='" + sheetname + "'!$D$1:$D$" + str(binsy),
             "marker": {
                 'type': 'square',
+                'border': {
+                    'type': "no_line",
+                },
                 "fill": {
                     "color": "red",
-                    "transparency": 70,
+                    "transparency": 80,
                 },
             }
         })
