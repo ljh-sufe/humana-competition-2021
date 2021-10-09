@@ -121,6 +121,9 @@ class excelOutput():
 
         #  hist chart
         chart1 = workbook.add_chart({"type": "column",})
+        chart1.set_chartarea({
+            'border': {'none': True},
+        })
         chart1.set_y_axis({
             'line': {'none': True},
             'major_unit': yinterval,
@@ -165,6 +168,9 @@ class excelOutput():
 
         # trend chart
         chart = workbook.add_chart({"type": "line",  })
+        chart.set_chartarea({
+            'border': {'none': True},
+        })
         chart.set_y_axis({
             'line': {'none': True},
             'major_unit': yinterval,
@@ -228,6 +234,9 @@ class excelOutput():
 
         # hist plot
         chart1 = workbook.add_chart({"type": "column", })
+        chart1.set_chartarea({
+            'border': {'none': True},
+        })
         chart1.set_y_axis({
             'line': {'none': True},
             'major_unit': yinterval,
@@ -270,6 +279,9 @@ class excelOutput():
 
         # trend plot
         chart = workbook.add_chart({"type": "line", })
+        chart.set_chartarea({
+            'border': {'none': True},
+        })
         chart.set_y_axis({
             'line': {'none': True},
             'major_unit': yinterval,
@@ -314,7 +326,7 @@ class excelOutput():
         var1 = DF.columns[1]     # y
         DF[[var0, var1]] = DF[[var0, var1]].fillna(DF[[var0, var1]].median(), axis=0)
 
-        DF = pd.concat([DF[DF[dataSet.dependentVar] == "no_vacc"].sample(6000), DF[DF[dataSet.dependentVar] == "vacc"].sample(6000)], axis=0)
+        DF = pd.concat([DF[DF[dataSet.dependentVar] == "no_vacc"].sample(10000), DF[DF[dataSet.dependentVar] == "vacc"].sample(10000)], axis=0)
 
         if var1 in dataSet.categoricalVar:
             yinterval = None
@@ -333,7 +345,10 @@ class excelOutput():
         DFno_vacc = DF[DF[dataSet.dependentVar] == "no_vacc"]
 
         workbook = self.workbook
-        chart = workbook.add_chart({"type": "scatter", })
+        chart = workbook.add_chart({"type": "scatter"})
+        chart.set_chartarea({
+            'border': {'none': True},
+        })
         chart.set_y_axis({
             'line': {'none': True},
             # 'major_unit': None,
@@ -344,7 +359,7 @@ class excelOutput():
         chart.set_plotarea({
             'layout': {
                 'x': 0.12,
-                'y': 0.12,
+                'y': 0.2,
                 'width': 0.7,
                 'height': 0.65,
             }
@@ -369,12 +384,11 @@ class excelOutput():
             "values": "='" + sheetname + "'!$B$1:$B$" + str(binsx),
             "marker": {
                 'type': 'square',
-                'border': {
-                    'type': "no_line",
-                },
+                'size': 2,
+                'border': {'none': True},
                 "fill": {
                     "color": "blue",
-                    "transparency": 80,
+                    "transparency": 60,
                 },
             }
         })
@@ -385,15 +399,23 @@ class excelOutput():
             "values": "='" + sheetname + "'!$D$1:$D$" + str(binsy),
             "marker": {
                 'type': 'square',
-                'border': {
-                    'type': "no_line",
-                },
+                'size': 2,
+                'border': {'none': True},
                 "fill": {
                     "color": "red",
-                    "transparency": 80,
+                    "transparency": 60,
                 },
             }
         })
-
+        title = var0 + "(x) & " + var1 + "(y)"
+        chart.set_title({
+            'name': title,
+            'overlay': True,
+            'layout': {
+                'x': 0.03,
+                'y': 0.03,
+            },
+            "name_font": {"size": 15}
+        })
         worksheet.insert_chart("F1", chart)
         self.workbook = workbook

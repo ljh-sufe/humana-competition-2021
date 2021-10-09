@@ -24,5 +24,5 @@ class indicatorAnalyzer():
         exceloutputer = excelOutput()
         vaccineData = dataSet.vaccineData
         DF = vaccineData[varList + [dataSet.dependentVar]]
-
-        exceloutputer.twofeatureCompare_workbook(DF, filepath=r"C:\Users\41409\Desktop\bc\result\twovar.xlsx")
+        filename = varList[0] + varList[1]
+        exceloutputer.twofeatureCompare_workbook(DF, filepath="C:\\Users\\41409\\Desktop\\bc\\result\\"+ filename +".xlsx")
