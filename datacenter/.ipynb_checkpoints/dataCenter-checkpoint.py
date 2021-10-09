@@ -25,7 +25,10 @@ sickVarList = ["auth_3mth_bh_acute_mean_los", "bh_ip_snf_net_paid_pmpm_cost_6to9
 from pandas_profiling import ProfileReport
 
 class dataSet():
-
+    """
+        类成员变量可以理解为静态对象，不需要实例对象也能够访问，只需要用类名就可以访问
+        该类的所有函数也是静态函数，不需要初始化就可以访问
+        """
     filepath = ""
     pickleFilePath = ""
     categoricalVar = []
