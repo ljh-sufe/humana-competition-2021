@@ -47,7 +47,7 @@ dataSet.init()
 ana = indicatorAnalyzer()
 # ana.analyze_twofeatures(["atlas_vlfoodsec_13_15", "atlas_pct_snap16"])
 
-# ana.analyze_var(["atlas_pct_free_lunch14", "est_age", "cms_orig_reas_entitle_cd", "rx_gpi2_17_pmpm_cost_t_12-9-6m_b4", "rx_overall_gpi_pmpm_ct_0to3m_b4"])
+ana.analyze_var(["atlas_pct_free_lunch14", "est_age", "cms_orig_reas_entitle_cd", "rx_gpi2_17_pmpm_cost_t_12-9-6m_b4", "rx_overall_gpi_pmpm_ct_0to3m_b4"])
 
 # ana.analyze_var(["est_age"])
 

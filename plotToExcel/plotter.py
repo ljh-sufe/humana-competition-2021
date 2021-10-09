@@ -127,13 +127,14 @@ class excelOutput():
         chart1.set_y_axis({
             'line': {'none': True},
             'major_unit': yinterval,
+            'min': 0,
         })
         chart1.set_plotarea({
             'layout': {
-                'x': 0.12,
-                'y': 0.12,
-                'width': 0.7,
-                'height': 0.65,
+                'x': 0.15,
+                'y': 0.25,
+                'width': 0.65,
+                'height': 0.50,
             }
         })
         worksheet.write_column("A1", index)
@@ -177,10 +178,10 @@ class excelOutput():
         })
         chart.set_plotarea({
             'layout': {
-                'x': 0.12,
-                'y': 0.2,
-                'width': 0.7,
-                'height': 0.65,
+                'x': 0.15,
+                'y': 0.25,
+                'width': 0.65,
+                'height': 0.50,
             }
         })
         worksheet.write_column("A1", index)
@@ -191,16 +192,24 @@ class excelOutput():
             "name": "vacc",
             "categories": "=" + sheetname + "!$A$1:$A$" + str(bins),
             "values": "=" + sheetname + "!$B$1:$B$" + str(bins),
-            'line':   {'width': 1},
+            'line':   {'width': 1, "color": "red",},
             'smooth': True,
+            "fill": {
+                "color": "red",
+                "transparency": 70,
+            },
         })
 
         chart.add_series({
             "name": "no_vacc",
             "categories": "=" + sheetname + "!$A$1:$A$" + str(bins),
             "values": "=" + sheetname + "!$C$1:$C$" + str(bins),
-            'line':   {'width': 1},
+            'line':   {'width': 1, "color": "blue",},
             'smooth': True,
+            "fill": {
+                "color": "blue",
+                "transparency": 70,
+            },
         })
         chart.combine(chart1)
         title = var
@@ -208,11 +217,12 @@ class excelOutput():
             'name': title,
             'overlay': True,
             'layout': {
-                'x': 0.03,
-                'y': 0.03,
+                'x': 0.05,
+                'y': 0.05,
             },
             "name_font": {"size": 15}
         })
+        chart.set_size({'width': 450, 'height': 350})
         worksheet.insert_chart("F1", chart)
 
 
@@ -252,10 +262,10 @@ class excelOutput():
         })
         chart1.set_plotarea({
             'layout': {
-                'x': 0.12,
-                'y': 0.2,
-                'width': 0.7,
-                'height': 0.65,
+                'x': 0.15,
+                'y': 0.25,
+                'width': 0.65,
+                'height': 0.50,
             }
         })
 
@@ -287,53 +297,20 @@ class excelOutput():
 
 
         # trend plot
-        chart = workbook.add_chart({"type": "line", })
-        chart.set_chartarea({
-            'border': {'none': True},
-        })
-        chart.set_y_axis({
-            'line': {'none': True},
-            'major_unit': yinterval,
-        })
-        chart.set_plotarea({
-            'layout': {
-                'x': 0.12,
-                'y': 0.2,
-                'width': 0.7,
-                'height': 0.65,
-            }
-        })
 
-        worksheet.write_column("A1", index)
-        worksheet.write_column("B1", groupVacc_freq)
-        worksheet.write_column("C1", groupNO_vacc_freq)
 
-        chart.add_series({
-            "name": "vacc",
-            "categories": "='" + sheetname + "'!$A$1:$A$" + str(bins),
-            "values": "='" + sheetname + "'!$B$1:$B$" + str(bins),
-            'line': {'width': 1},
-            'smooth': True,
-        })
-        chart.add_series({
-            "name": "no_vacc",
-            "categories": "='" + sheetname + "'!$A$1:$A$" + str(bins),
-            "values": "='" + sheetname + "'!$C$1:$C$" + str(bins),
-            'line': {'width': 1},
-            'smooth': True,
-        })
-        chart.combine(chart1)
         title = var
-        chart.set_title({
+        chart1.set_title({
             'name': title,
             'overlay': True,
             'layout': {
-                'x': 0.03,
-                'y': 0.03,
+                'x': 0.05,
+                'y': 0.05,
             },
             "name_font": {"size": 15}
         })
-        worksheet.insert_chart("F1", chart)
+        chart1.set_size({'width': 450, 'height': 350})
+        worksheet.insert_chart("F1", chart1)
 
         self.workbook = workbook
 
@@ -376,10 +353,10 @@ class excelOutput():
         # })
         chart.set_plotarea({
             'layout': {
-                'x': 0.12,
-                'y': 0.2,
-                'width': 0.7,
-                'height': 0.65,
+                'x': 0.15,
+                'y': 0.25,
+                'width': 0.65,
+                'height': 0.5,
             }
         })
 
@@ -430,10 +407,11 @@ class excelOutput():
             'name': title,
             'overlay': True,
             'layout': {
-                'x': 0.03,
-                'y': 0.03,
+                'x': 0.05,
+                'y': 0.05,
             },
             "name_font": {"size": 15}
         })
+        chart.set_size({'width': 450, 'height': 350})
         worksheet.insert_chart("F1", chart)
         self.workbook = workbook
