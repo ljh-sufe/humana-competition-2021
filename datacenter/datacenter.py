@@ -15,13 +15,6 @@ logging.basicConfig(level=logging.INFO, format=LOG_FORMAT)
 from sklearn.preprocessing import KBinsDiscretizer, FunctionTransformer
 
 
-sickVarList = ["auth_3mth_bh_acute_mean_los", "bh_ip_snf_net_paid_pmpm_cost_6to9m_b4",
-               "bh_ip_snf_net_paid_pmpm_cost_9to12m_b4", "bh_ip_snf_mbr_resp_pmpm_cost_3to6m_b4", "bh_ip_snf_net_paid_pmpm_cost",
-               "bh_ip_snf_mbr_resp_pmpm_cost_6to9m_b4", "bh_ip_snf_net_paid_pmpm_cost_6to9m_b4",
-               "bh_ip_snf_net_paid_pmpm_cost_3to6m_b4", "bh_ip_snf_net_paid_pmpm_cost_9to12m_b4",
-               "bh_ip_snf_mbr_resp_pmpm_cost_9to12m_b4", "ccsp_065_pmpm_ct", "bh_ip_snf_net_paid_pmpm_cost_0to3m_b4"]
-
-
 from pandas_profiling import ProfileReport
 
 class dataSet():
