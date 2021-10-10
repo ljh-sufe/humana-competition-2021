@@ -149,6 +149,7 @@ class lightGBMModel():
         plt.figure()
         lgbm.plot_importance(classifier, max_num_features=30, importance_type="split")
         plt.show()
+
         plt.figure()
         lgbm.plot_tree(classifier)
         # plt.savefig("plot_tree.png", dpi=500)

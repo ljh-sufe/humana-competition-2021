@@ -131,7 +131,7 @@ class logisticRegressionModel():
         elif self.optimizer == "ADAM":
             NNModel.optimizer = torch.optim.Adam(NNModel.parameters(), lr=self.learning_rate)
         #endregion
-        scheduler = ReduceLROnPlateau(NNModel.optimizer, 'min', factor=0.5, patience=5)
+        scheduler = ReduceLROnPlateau(NNModel.optimizer, 'min', factor=0.5, patience=5, min_lr=0.0005)
         epochs = self.epochs
         for epoch in range(epochs):
             print("epoch " + str(epoch))
@@ -167,7 +167,7 @@ class logisticRegressionModel():
                 NNModel.eval()
                 eval_y_pred = NNModel(evalX)
                 val_loss = NNModel.loss(eval_y_pred.reshape(eval_y_pred.shape[0],), torch.Tensor(evaly.values).to(device))
-                print("学习率为", NNModel.optimizer.param_groups[0]["lr"])
+                # print("学习率为", NNModel.optimizer.param_groups[0]["lr"])
                 eval_y_pred = eval_y_pred.cpu().detach().numpy()
 
                 self.evalPredictProba = eval_y_pred
@@ -201,8 +201,6 @@ class logisticRegressionModel():
         self.get_para_ = para
         self.pet_paraDF = a
         self.compute_standard_deviation()
-
-
 
         a.to_csv("para.csv")
 
@@ -285,6 +283,9 @@ class logisticRegressionModel():
 
 
     def compute_standard_deviation(self):
+
+        logging.info("begin computing standard deviation of parameters")
+
         _1sampleLength = dataSet._1sampleLength
         _0sampleLength = dataSet._0sampleLength
         X_train_label0 = dataSet.X_train_label0
@@ -309,7 +310,7 @@ class logisticRegressionModel():
             XTVX = torch.mm(XTVX, torchTempData)
             XTVX = XTVX.cpu().detach().numpy()
             if np.isnan(XTVX).sum() > 0:
-                logging.ERROR("出现nan！")
+                logging.error("出现nan！")
                 break
             if finalXTVX is None:
                 # wholePredict = tempPredict
@@ -330,6 +331,6 @@ class logisticRegressionModel():
         paraDF = paraDF[["para", "std", "lb", "ub", "0inbound"]]
         paraDF[paraDF["0inbound"] == 0].sort_values(by="para")
 
-        paraDF.to_csv("logistic_result.csv")
+        paraDF.to_csv("result/logistic_result.csv")
 
         # 由于样本量太大，所以需要抽样计算sd

@@ -6,6 +6,7 @@ import logging
 from scipy import stats
 from scipy.stats import chi2_contingency
 from dataCenter.all0var import all0var
+from dask.dataframe import from_pandas
 
 LOG_FORMAT = "%(asctime)s - %(levelname)s - %(message)s"
 logging.basicConfig(level=logging.INFO, format=LOG_FORMAT)
@@ -224,6 +225,9 @@ class dataSet():
         contiDF = X[contiVar]
         contiDF = contiDF.fillna(contiDF.median())
         contiDF = (contiDF - contiDF.mean()) / contiDF.std()
+
+        # contiDF = contiDF.applymap(lambda x: min(x, 1.645) if x > 0 else max(x, -1.645))
+        contiDF = pd.read_pickle(r"C:\Users\41409\Desktop\bc\data\contiDF")
         #endregion
 
         #region  discrete data for discrete value use median to fill NA
@@ -231,6 +235,8 @@ class dataSet():
         disDF = X[disVar]
         disDF = disDF.fillna(disDF.median())
         disDF = (disDF - disDF.mean()) / disDF.std()
+        # disDF = disDF.applymap(lambda x: min(x, 1.645) if x > 0 else max(x, -1.645))
+        disDF = pd.read_pickle(r"C:\Users\41409\Desktop\bc\data\disDF")
         #endregion
         # concat them
         # X = pd.concat([contiDF, disDF, twoValueDF, dummyDF, est_age_mabh_seg], axis=1)
