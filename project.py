@@ -3,10 +3,12 @@
 
 from pandas_profiling import ProfileReport
 from dataCenter.vartype import newContiVar, newDummyVar, newDiscreVar
+from dataCenter.clusteringVarList import kvarList
 from dataCenter.dataCenter import dataSet, ToolFactor
 from model.logisticRegModel import logisticRegressionModel
 from model.lightGBMModel import lightGBMModel
 from indicatorAnalyzer.analyzer import indicatorAnalyzer
+from patientAnalyzer.kmeanAnalyzer import kmeansModel
 import warnings
 
 warnings.filterwarnings('ignore')
@@ -25,18 +27,18 @@ dataSet.init()
 
 
 
-# dataSet.loadHoldOut()
-# dataSet.importExternalVariable()
+dataSet.loadHoldOut()
+dataSet.importExternalVariable()
 #
-# dataSet.processor()
+dataSet.processor()
 # dataSet.varSelector()
 
 # # dataSet.initPickleData(pickleFilepath)
-# dataSet.initEvalData(ratio=0.2)
+dataSet.initEvalData(ratio=0.2)
 
 
-# model1 = logisticRegressionModel(lr=0.01, optimizer="ADAM", epochs=5, ifEval=True, ifQuadratic=False)
-# model1.trainModel()
+model1 = logisticRegressionModel(lr=0.01, optimizer="ADAM", epochs=50, ifEval=True, ifQuadratic=False)
+model1.trainModel()
 # model2 = lightGBMModel(ifEval=True)
 # model2.trainModel()
 
@@ -47,9 +49,13 @@ dataSet.init()
 ana = indicatorAnalyzer()
 # ana.analyze_twofeatures(["atlas_vlfoodsec_13_15", "atlas_pct_snap16"])
 
-ana.analyze_var(["atlas_pct_free_lunch14", "est_age", "cms_orig_reas_entitle_cd", "rx_gpi2_17_pmpm_cost_t_12-9-6m_b4", "rx_overall_gpi_pmpm_ct_0to3m_b4"])
+# ana.analyze_var(["atlas_pct_free_lunch14", "est_age", "cms_orig_reas_entitle_cd", "rx_gpi2_17_pmpm_cost_t_12-9-6m_b4", "rx_overall_gpi_pmpm_ct_0to3m_b4"])
 
 # ana.analyze_var(["est_age"])
+
+
+ptana = kmeansModel(n_clusters=5)
+ptana.Kprototype(kvarList)
 
 
 
